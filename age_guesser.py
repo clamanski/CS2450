@@ -7,9 +7,11 @@
 import random
 
 def guess_age():
+    min_age = 15
+    max_age = 40
     print("Hello! Welcome to the Age Guesser Game!")
     name = input("What's your name? ")
-    guess = random.randint(15, 40)
+    guess = random.randint(min_age, max_age)
     while True:
         response = input(f"Is your age {guess}? (y/n): ").lower()
         if response == "y":
@@ -17,13 +19,18 @@ def guess_age():
             break
         else:
             print("Rats!")
+            print(min_age, max_age)
             hint = input("Are you older or younger than my guess? (o/y): ").lower()
             if hint == "o":
-                guess = random.randint(guess + 1, 40)
+                if guess > min_age:
+                    min_age = guess + 1
+                    guess = random.randint(min_age, max_age)
             elif hint == "y":
-                guess = random.randint(15, guess - 1)
-            
+                if guess < max_age:
+                    max_age = guess - 1
+                    guess = random.randint(min_age, max_age)
 
+            
 if __name__ == "__main__":
     guess_age()
 
