@@ -17,7 +17,12 @@ def guess_age():
             break
         else:
             print("Rats!")
-            guess = random.randint(15, 40)
+            hint = input("Are you older or younger than my guess? (o/y): ").lower()
+            if hint == "o":
+                guess = random.randint(guess + 1, 40)
+            elif hint == "y":
+                guess = random.randint(15, guess - 1)
+            
 
 if __name__ == "__main__":
     guess_age()
